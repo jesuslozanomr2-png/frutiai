@@ -2,468 +2,332 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta name="google-site-verification" content="CK74UgvPVfiaFfxnUgZI9q_AcCjOCODfg_4zgw7EcsE" />
-<meta charset="UTF-8"
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FrutiAI: crea historias de frutas, prepara tus episodios y explora ideas para vídeos animados.">
+  <title>FrutiAI 🍓</title>
 
-<title>FrutiAI - Crea tus frutinovelas</title>
+  <style>
+    * { box-sizing: border-box; }
 
-<style>
-:root {
-  --pink: #ff4fa3;
-  --purple: #8b5cf6;
-  --dark: #171326;
-  --card: #241d38;
-  --white: #ffffff;
-  --muted: #c5bdd8;
-}
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: white;
+      background: linear-gradient(135deg, #180b2c, #40105d, #811b68);
+    }
 
-* {
-  box-sizing: border-box;
-}
+    header {
+      padding: 24px 16px;
+      text-align: center;
+      background: #160923;
+      border-bottom: 2px solid #ff65bd;
+    }
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: var(--dark);
-  color: var(--white);
-}
+    header h1 {
+      margin: 0;
+      color: #ff80c8;
+      font-size: 42px;
+    }
 
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 7%;
-  border-bottom: 1px solid #382d4d;
-}
+    header p { color: #eadcf7; }
 
-.logo {
-  font-size: 27px;
-  font-weight: 900;
-}
+    main {
+      width: min(900px, 92%);
+      margin: 30px auto;
+    }
 
-.logo span {
-  color: var(--pink);
-}
+    .card {
+      margin-bottom: 22px;
+      padding: 24px;
+      background: rgba(255,255,255,.09);
+      border: 1px solid rgba(255,255,255,.17);
+      border-radius: 18px;
+      box-shadow: 0 8px 25px #12051d55;
+    }
 
-nav a {
-  color: white;
-  text-decoration: none;
-  margin-left: 20px;
-}
+    h2 { color: #ff9bd5; }
 
-button {
-  cursor: pointer;
-  border: 0;
-  border-radius: 12px;
-  padding: 14px 20px;
-  font-size: 15px;
-  font-weight: bold;
-  background: linear-gradient(100deg, var(--pink), var(--purple));
-  color: white;
-}
+    label {
+      display: block;
+      margin: 16px 0 8px;
+      font-weight: bold;
+    }
 
-.hero {
-  text-align: center;
-  padding: 85px 20px 55px;
-  background:
-    radial-gradient(ellipse at top, #593078 0%, transparent 65%);
-}
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #c6a2dc;
+      border-radius: 10px;
+      font-size: 16px;
+    }
 
-.badge {
-  display: inline-block;
-  border: 1px solid #8d5da7;
-  border-radius: 50px;
-  padding: 9px 16px;
-  color: #ffc5e1;
-}
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
 
-h1 {
-  font-size: clamp(40px, 7vw, 72px);
-  margin: 25px auto;
-  max-width: 900px;
-  line-height: 1.05;
-}
+    button {
+      margin-top: 16px;
+      padding: 13px 18px;
+      color: white;
+      background: #e63d9a;
+      border: 0;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-.gradient {
-  background: linear-gradient(90deg, #ff77b7, #bda1ff);
-  -webkit-background-clip: text;
-  color: transparent;
-}
+    button:hover { background: #c82983; }
 
-.hero p {
-  max-width: 650px;
-  margin: 0 auto 30px;
-  color: var(--muted);
-  font-size: 18px;
-  line-height: 1.7;
-}
+    .secondary { background: #7139a5; }
 
-section {
-  padding: 55px 7%;
-}
+    .result {
+      margin-top: 18px;
+      padding: 16px;
+      color: #261132;
+      background: #fff0fa;
+      border-radius: 12px;
+      white-space: pre-wrap;
+      line-height: 1.6;
+    }
 
-.section-title {
-  text-align: center;
-  font-size: 35px;
-  margin-bottom: 12px;
-}
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 14px;
+    }
 
-.section-description {
-  color: var(--muted);
-  text-align: center;
-  margin-bottom: 35px;
-}
+    .plan {
+      padding: 18px;
+      background: #2a1240;
+      border: 1px solid #b76bc9;
+      border-radius: 14px;
+    }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 20px;
-}
+    .price {
+      font-size: 27px;
+      font-weight: bold;
+      color: #ff9bd5;
+    }
 
-.card {
-  background: var(--card);
-  border: 1px solid #413353;
-  border-radius: 20px;
-  padding: 25px;
-}
+    .note {
+      color: #e4d5ed;
+      font-size: 14px;
+      line-height: 1.5;
+    }
 
-.fruit {
-  font-size: 48px;
-}
-
-.card h3 {
-  margin-bottom: 10px;
-}
-
-.card p {
-  color: var(--muted);
-  line-height: 1.6;
-}
-
-#crear {
-  background: #1d172e;
-}
-
-form {
-  max-width: 700px;
-  margin: auto;
-  background: var(--card);
-  padding: 28px;
-  border-radius: 20px;
-  border: 1px solid #49375c;
-}
-
-label {
-  display: block;
-  margin: 18px 0 8px;
-  font-weight: bold;
-}
-
-input, select, textarea {
-  width: 100%;
-  padding: 13px;
-  border-radius: 10px;
-  border: 1px solid #59486d;
-  background: #171326;
-  color: white;
-  font-size: 16px;
-}
-
-textarea {
-  min-height: 90px;
-  resize: vertical;
-}
-
-form button {
-  width: 100%;
-  margin-top: 22px;
-}
-
-#resultado {
-  max-width: 700px;
-  margin: 25px auto 0;
-  background: var(--card);
-  border-radius: 18px;
-  padding: 25px;
-  white-space: pre-wrap;
-  line-height: 1.8;
-  display: none;
-}
-
-.price {
-  font-size: 35px;
-  font-weight: bold;
-}
-
-.price small {
-  font-size: 14px;
-  color: var(--muted);
-}
-
-.plan button {
-  width: 100%;
-  margin-top: 15px;
-}
-
-.featured {
-  border: 2px solid var(--pink);
-}
-
-.note {
-  color: var(--muted);
-  text-align: center;
-  font-size: 13px;
-  line-height: 1.7;
-  max-width: 750px;
-  margin: 25px auto;
-}
-
-footer {
-  text-align: center;
-  padding: 30px;
-  color: var(--muted);
-  border-top: 1px solid #382d4d;
-}
-
-@media (max-width: 600px) {
-  header {
-    padding: 18px;
-  }
-
-  nav a {
-    margin-left: 8px;
-    font-size: 13px;
-  }
-
-  section {
-    padding: 40px 18px;
-  }
-
-  .hero {
-    padding-top: 60px;
-  }
-}
-</style>
+    footer {
+      padding: 25px;
+      text-align: center;
+      color: #e4d5ed;
+    }
+  </style>
 </head>
 
 <body>
+  <header>
+    <h1>🍓 FrutiAI</h1>
+    <p>¡Tu imaginación se convierte en una frutinovela!</p>
+  </header>
 
-<header>
-  <div class="logo">🍓 Fruti<span>AI</span></div>
+  <main>
+    <section class="card">
+      <h2>🎬 1. Creador de vídeos</h2>
+      <p>
+        Prepara la idea de tu vídeo animado con personajes frutales
+        y voces en español.
+      </p>
 
-  <nav>
-    <a href="#historias">Historias</a>
-    <a href="#crear">Crear</a>
-    <a href="#planes">Planes</a>
-  </nav>
-</header>
+      <label for="videoIdea">¿Qué ocurre en tu vídeo?</label>
+      <textarea id="videoIdea"
+        placeholder="Ejemplo: Fresa descubre que Piña le ha ocultado un secreto..."></textarea>
 
-<main>
-
-  <section class="hero">
-    <div class="badge">🍓 Tu imaginación, tu telenovela</div>
-
-    <h1>
-      Las frutas también tienen
-      <span class="gradient">secretos.</span>
-    </h1>
-
-    <p>
-      Inventa romances imposibles, traiciones inesperadas
-      y dramas frutales. Crea historias que dejen a todos
-      esperando el siguiente episodio.
-    </p>
-
-    <button onclick="document.querySelector('#crear').scrollIntoView({behavior:'smooth'})">
-      ✨ Crear mi frutinovela
-    </button>
-  </section>
-
-  <section id="historias">
-    <h2 class="section-title">Historias jugosas 🍊</h2>
-    <p class="section-description">
-      ¿Qué drama quieres contar hoy?
-    </p>
-
-    <div class="grid">
-
-      <article class="card">
-        <div class="fruit">🍓</div>
-        <h3>La traición de Fresita</h3>
-        <p>Un secreto amenaza con destruir una relación aparentemente perfecta.</p>
-      </article>
-
-      <article class="card">
-        <div class="fruit">🍌</div>
-        <h3>Amor prohibido</h3>
-        <p>Dos frutas de familias rivales se enamoran contra todo pronóstico.</p>
-      </article>
-
-      <article class="card">
-        <div class="fruit">🍊</div>
-        <h3>La doble vida</h3>
-        <p>Una misteriosa naranja esconde un pasado que nadie imagina.</p>
-      </article>
-
-    </div>
-  </section>
-
-  <section id="crear">
-    <h2 class="section-title">Crea tu propia historia ✍️</h2>
-
-    <p class="section-description">
-      Personaliza tu historia y genera un episodio de prueba.
-    </p>
-
-    <form id="formulario">
-
-      <label for="protagonista">Protagonista</label>
-      <select id="protagonista">
-        <option>Fresita 🍓</option>
-        <option>Banano 🍌</option>
-        <option>Naranjita 🍊</option>
-        <option>Manzanita 🍎</option>
-        <option>Uvita 🍇</option>
+      <label for="videoStyle">Estilo de animación</label>
+      <select id="videoStyle">
+        <option>Animación 3D</option>
+        <option>Dibujos animados</option>
+        <option>Estilo película familiar</option>
       </select>
 
-      <label for="genero">Tipo de historia</label>
-      <select id="genero">
-        <option value="romance">Romance</option>
-        <option value="traicion">Traición</option>
-        <option value="misterio">Misterio</option>
-        <option value="comedia">Comedia</option>
-        <option value="drama">Drama familiar</option>
+      <label for="videoVoice">Voz</label>
+      <select id="videoVoice">
+        <option>Español</option>
+        <option>Español con voz femenina</option>
+        <option>Español con voz masculina</option>
       </select>
 
-      <label for="episodios">Número de episodios</label>
-      <select id="episodios">
-        <option value="1">1 episodio</option>
-        <option value="3">3 episodios</option>
-        <option value="5">5 episodios</option>
+      <label for="videoDuration">Duración deseada</label>
+      <select id="videoDuration">
+        <option value="30 segundos">30 segundos</option>
+        <option value="1 minuto">1 minuto</option>
+        <option value="3 minutos">3 minutos</option>
       </select>
 
-      <label for="idea">Tu idea para la historia</label>
-      <textarea id="idea" maxlength="500"
-        placeholder="Ejemplo: Fresita descubre que su novio le oculta un secreto..."></textarea>
+      <button onclick="prepareVideo()">Preparar mi vídeo</button>
 
-      <button type="submit">🍓 Generar frutinovela</button>
+      <div id="videoResult" class="result" hidden></div>
+      <p class="note">
+        Versión inicial: prepara la descripción del vídeo.
+        La generación real de imágenes animadas y voces aún requiere
+        conectar un servicio de vídeo y otro de voz.
+      </p>
+    </section>
 
-    </form>
+    <section class="card">
+      <h2>🤖 2. Generador de frutinovelas</h2>
 
-    <div id="resultado" aria-live="polite"></div>
-  </section>
+      <label for="hero">Personaje principal</label>
+      <select id="hero">
+        <option>Fresa</option>
+        <option>Plátano</option>
+        <option>Piña</option>
+        <option>Manzana</option>
+        <option>Uva</option>
+        <option>Sandía</option>
+      </select>
 
-  <section id="planes">
-    <h2 class="section-title">Elige tu plan 👑</h2>
+      <label for="genre">Tipo de historia</label>
+      <select id="genre">
+        <option>Drama y secretos</option>
+        <option>Comedia</option>
+        <option>Misterio</option>
+        <option>Amistad y aventuras</option>
+      </select>
 
-    <p class="section-description">
-      Precios orientativos para diseñar los futuros planes.
-    </p>
+      <label for="idea">Tu idea</label>
+      <textarea id="idea"
+        placeholder="Escribe aquí tu idea para la historia..."></textarea>
 
-    <div class="grid">
+      <button onclick="generateStory()">Crear mi historia</button>
 
-      <article class="card plan">
-        <div class="fruit">🍓</div>
-        <h3>Fruti Basic</h3>
-        <div class="price">4,99 € <small>/ mes</small></div>
-        <p>20 historias al mes.</p>
-        <p>Acceso al generador de historias.</p>
-        <button onclick="avisarPago()">Elegir Basic</button>
-      </article>
+      <div id="storyResult" class="result" hidden></div>
 
-      <article class="card plan featured">
-        <div class="fruit">🍊</div>
-        <h3>Fruti Plus</h3>
-        <div class="price">9,99 € <small>/ mes</small></div>
-        <p>60 historias al mes.</p>
-        <p>Más posibilidades para tus novelas.</p>
-        <button onclick="avisarPago()">Elegir Plus</button>
-      </article>
+      <p class="note">
+        Esta demostración utiliza plantillas. Para generar historias
+        originales con una IA real habrá que conectar una API mediante
+        un servidor seguro.
+      </p>
+    </section>
 
-      <article class="card plan">
-        <div class="fruit">👑</div>
-        <h3>Fruti Pro</h3>
-        <div class="price">19,99 € <small>/ mes</small></div>
-        <p>150 historias al mes.</p>
-        <p>Para creadores frecuentes.</p>
-        <button onclick="avisarPago()">Elegir Pro</button>
-      </article>
+    <section class="card">
+      <h2>💳 3. Suscripciones</h2>
+      <p>Estos son ejemplos de planes para diseñar la futura oferta.</p>
 
-    </div>
+      <div class="plans">
+        <div class="plan">
+          <h3>🍇 Gratis</h3>
+          <p class="price">0 €</p>
+          <p>Probar el creador de historias.</p>
+          <button class="secondary" onclick="showPlan('Gratis')">
+            Elegir plan
+          </button>
+        </div>
 
-    <p class="note">
-      Estos planes son demostrativos. Actualmente no se realizan
-      pagos ni se activan suscripciones. Los precios y límites
-      deberán revisarse antes de lanzar el servicio.
-    </p>
-  </section>
+        <div class="plan">
+          <h3>🍓 Creador</h3>
+          <p class="price">4,99 €/mes</p>
+          <p>Plan de ejemplo para futuras funciones.</p>
+          <button onclick="showPlan('Creador')">
+            Me interesa
+          </button>
+        </div>
 
-</main>
+        <div class="plan">
+          <h3>👑 Pro</h3>
+          <p class="price">9,99 €/mes</p>
+          <p>Plan de ejemplo para futuras funciones avanzadas.</p>
+          <button onclick="showPlan('Pro')">
+            Me interesa
+          </button>
+        </div>
+      </div>
 
-<footer>
-  🍓 FrutiAI · Historias con mucho drama.
-  <br><br>
-  Proyecto en desarrollo.
-</footer>
+      <div id="planResult" class="result" hidden></div>
 
-<script>
-const formulario = document.getElementById("formulario");
-const resultado = document.getElementById("resultado");
+      <p class="note">
+        Los precios son ejemplos, no cobros reales. No introduzcas
+        datos bancarios aquí. Para activar pagos necesitaremos un
+        proveedor de pagos y un servidor seguro.
+      </p>
+    </section>
+  </main>
 
-formulario.addEventListener("submit", function(event) {
-  event.preventDefault();
+  <footer>
+    🍓 FrutiAI · Tu mundo de historias frutales
+  </footer>
 
-  const protagonista = document.getElementById("protagonista").value;
-  const genero = document.getElementById("genero").value;
-  const episodios = Number(document.getElementById("episodios").value);
-  const idea = document.getElementById("idea").value.trim();
+  <script>
+    function prepareVideo() {
+      const idea = document.getElementById("videoIdea").value.trim();
+      const style = document.getElementById("videoStyle").value;
+      const voice = document.getElementById("videoVoice").value;
+      const duration = document.getElementById("videoDuration").value;
+      const result = document.getElementById("videoResult");
 
-  const historias = {
-    romance: `${protagonista} conoció a una fruta misteriosa y sintió que su vida estaba a punto de cambiar.`,
-    traicion: `${protagonista} descubrió una conversación secreta que podía cambiar todas sus relaciones.`,
-    misterio: `${protagonista} encontró una carta misteriosa con una advertencia inquietante.`,
-    comedia: `${protagonista} organizó una cita perfecta, pero un accidente convirtió la velada en un caos.`,
-    drama: `${protagonista} reunió a su familia para revelar una verdad que llevaba demasiado tiempo escondida.`
-  };
+      if (!idea) {
+        alert("Escribe primero la idea de tu vídeo.");
+        return;
+      }
 
-  let texto = `🍓 FRUTINOVELA: EL SECRETO DE ${protagonista.toUpperCase()}\n\n`;
-
-  if (idea) {
-    texto += `Tu idea: ${idea}\n\n`;
-  }
-
-  for (let i = 1; i <= episodios; i++) {
-    texto += `EPISODIO ${i}\n\n`;
-
-    if (i === 1) {
-      texto += historias[genero];
-    } else {
-      texto += `${protagonista} siguió investigando y descubrió nuevas pistas que complicaron la situación.`;
+      result.hidden = false;
+      result.textContent =
+        "🎬 DESCRIPCIÓN PREPARADA\n\n" +
+        "Idea: " + idea + "\n" +
+        "Estilo: " + style + "\n" +
+        "Voz solicitada: " + voice + "\n" +
+        "Duración deseada: " + duration + "\n\n" +
+        "Este es el borrador para un futuro generador de vídeo. " +
+        "Todavía no se ha creado ningún archivo de vídeo.";
     }
 
-    texto += `\n\n${protagonista}: «Necesito saber toda la verdad».\n\n`;
+    function generateStory() {
+      const hero = document.getElementById("hero").value;
+      const genre = document.getElementById("genre").value;
+      const idea = document.getElementById("idea").value.trim();
+      const result = document.getElementById("storyResult");
 
-    if (i < episodios) {
-      texto += `Pero justo cuando parecía que todo estaba resuelto, alguien llamó a la puerta...\n\n`;
-    } else {
-      texto += `CONTINUARÁ... 🍊\n\n`;
+      const plots = {
+        "Drama y secretos":
+          hero + " descubre un secreto que podría cambiarlo todo.",
+        "Comedia":
+          hero + " organiza un plan disparatado que sale al revés.",
+        "Misterio":
+          hero + " encuentra una pista misteriosa en el mercado.",
+        "Amistad y aventuras":
+          hero + " emprende una aventura para ayudar a sus amigos."
+      };
+
+      result.hidden = false;
+      result.textContent =
+        "🍓 TÍTULO: El secreto de " + hero + "\n\n" +
+        "Género: " + genre + "\n\n" +
+        (idea ? "Tu idea: " + idea + "\n\n" : "") +
+        plots[genre] + "\n\n" +
+        "EPISODIO 1\n" +
+        hero + ": «¡No puedo creer lo que está pasando!»\n\n" +
+        "Narrador: En un mundo lleno de frutas, cada día " +
+        "puede esconder una nueva sorpresa.\n\n" +
+        "Continuará...";
     }
-  }
 
-  resultado.textContent = texto;
-  resultado.style.display = "block";
-  resultado.scrollIntoView({ behavior: "smooth" });
-});
+    function showPlan(plan) {
+      const result = document.getElementById("planResult");
+      result.hidden = false;
 
-function avisarPago() {
-  alert(
-    "Las suscripciones todavía no están activas. " +
-    "Esta versión es una demostración y no puede cobrar dinero."
-  );
-}
-</script>
-
+      if (plan === "Gratis") {
+        result.textContent =
+          "Has seleccionado la demostración gratuita. " +
+          "Puedes probar el generador de historias.";
+      } else {
+        result.textContent =
+          "Has mostrado interés en el plan " + plan + ". " +
+          "Las suscripciones todavía no están activas y no se ha " +
+          "realizado ningún cobro.";
+      }
+    }
+  </script>
 </body>
 </html>
 ```
